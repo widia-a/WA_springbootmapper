@@ -106,4 +106,6 @@ public class ConstantMessage {
     public final static String WARNING_ACCOUNT_DESTINATION_MANDATORY = "AKUN WALLET TUJUAN TIDAKBOLEH KOSONG";
     public final static String WARNING_AMMOUNTZ_MANDATORY = "MASUKKAN JUMLAH NOMINAL YANG INGIN DITRANSFER";
 
+    public static final String TRANSFER_SUCCESS = "TRANSAKSI BERHASIL";
+    public static final String TRANSFER_FAILED = "TRANSAKSI GAGAL. SALDO TIDAK CUKUP";
 }

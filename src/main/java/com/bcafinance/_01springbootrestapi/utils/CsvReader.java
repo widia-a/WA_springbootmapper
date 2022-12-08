@@ -1,6 +1,8 @@
 package com.bcafinance._01springbootrestapi.utils;
 
 
+import com.bcafinance._01springbootrestapi.models.Account;
+import com.bcafinance._01springbootrestapi.models.Cars;
 import com.bcafinance._01springbootrestapi.models.Citizen;
 import com.bcafinance._01springbootrestapi.models.Messenger;
 import org.apache.commons.csv.CSVFormat;
@@ -86,6 +88,72 @@ public class CsvReader {
                 csvParser.close();
             }
             return lsMessenger;
+        }
+    }
+
+    public static List<Cars> csvToCarData(InputStream inputStream) throws Exception {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+        CSVParser csvParser = new CSVParser(bufferedReader,
+                CSVFormat.DEFAULT.withFirstRecordAsHeader().
+                        withIgnoreHeaderCase().
+                        withTrim()
+        );
+        List<Cars> lsCar = new ArrayList<Cars>();
+        try {
+
+            Iterable<CSVRecord> iterRecords = csvParser.getRecords();
+
+            for (CSVRecord record : iterRecords) {
+                Cars cars = new Cars();
+                cars.setCarName(record.get("CarName"));
+                cars.setCarModel(record.get("CarModel"));
+                cars.setSold(Integer.parseInt(record.get("Sold")));
+                cars.setStock(Integer.parseInt(record.get("Stock")));
+                cars.setPrice(Double.parseDouble(record.get("Price")));
+                cars.setDiscount(Double.parseDouble(record.get("Discount")));
+                cars.setDateIn(LocalDate.parse(record.get("DateIn")));
+                cars.setDateOut(LocalDate.parse(record.get("DateOut")));
+                lsCar.add(cars);
+            }
+
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage());
+        } finally {
+
+            if (!csvParser.isClosed()) {
+                csvParser.close();
+            }
+            return lsCar;
+        }
+    }
+
+    public static List<Account> csvToAccData(InputStream inputStream) throws Exception {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+        CSVParser csvParser = new CSVParser(bufferedReader,
+                CSVFormat.DEFAULT.withFirstRecordAsHeader().
+                        withIgnoreHeaderCase().
+                        withTrim()
+        );
+        List<Account> lsAcc = new ArrayList<Account>();
+        try {
+
+            Iterable<CSVRecord> iterRecords = csvParser.getRecords();
+
+            for (CSVRecord record : iterRecords) {
+                Account account = new Account();
+                account.setAccNumber(record.get("AccountNumber"));
+                account.setBalance(Double.parseDouble(record.get("Balance")));
+                lsAcc.add(account);
+            }
+
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage());
+        } finally {
+
+            if (!csvParser.isClosed()) {
+                csvParser.close();
+            }
+            return lsAcc;
         }
     }
 }

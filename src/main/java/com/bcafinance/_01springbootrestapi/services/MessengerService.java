@@ -9,7 +9,6 @@ Version 1.0
 */
 
 
-import com.bcafinance._01springbootrestapi.models.Citizen;
 import com.bcafinance._01springbootrestapi.models.Messenger;
 import com.bcafinance._01springbootrestapi.repos.MessengerRepo;
 import com.bcafinance._01springbootrestapi.utils.CsvReader;

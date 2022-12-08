@@ -21,17 +21,19 @@ import java.util.Optional;
 public interface AccountRepo extends JpaRepository<Account, Long> {
     Optional<Account> findByAccNumber(String accNumber);
 
-//    @Modifying
-//    @Query(
-//            value =
-//                    "INSERT INTO MstBank (AccountID, AccountNumber, Balance, CreatedBy, CreatedDate, IsActive, ModifiedBy, ModifiedDate)" +
-//                            " VALUES (:AccountID, :AccountNumber, :Balance, :CreatedBy, :CreatedDate, :IsActive, :ModifiedBy, :ModifiedDate)",
-//            nativeQuery = true)
-//    void insertBanks(@Param("AccountID") String accountId, @Param("AccountNumber") String accountNumber,
-//                        @Param("Balance") Double balance,
-//                        @Param("CreatedBy") String createdBy, @Param("CreatedDate") Date createdDate,
-//                        @Param("IsActive") boolean isActive,
-//                        @Param("ModifiedBy") String modifiedBy, @Param("ModifiedDate") Date modifiedDate
-//                        );
+    @Modifying
+    @Query(
+            value =
+                    "INSERT INTO MstBank (AccountNumber, Balance, CreatedBy, CreatedDate, IsActive)" +
+                            " VALUES (:AccountNumber, :Balance, :CreatedBy, :CreatedDate, :IsActive)",
+            nativeQuery = true)
+    void insertBanks(
+                        @Param("AccountNumber") String accountNumber,
+                        @Param("Balance") Double balance,
+                        @Param("CreatedBy") String createdBy, @Param("CreatedDate") Date createdDate,
+                        @Param("IsActive") boolean isActive
+                    );
+
+
 }
 

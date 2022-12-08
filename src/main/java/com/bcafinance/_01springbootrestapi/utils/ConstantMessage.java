@@ -108,4 +108,5 @@ public class ConstantMessage {
 
     public static final String TRANSFER_SUCCESS = "TRANSAKSI BERHASIL";
     public static final String TRANSFER_FAILED = "TRANSAKSI GAGAL. SALDO TIDAK CUKUP";
+    public static final String SUCCESS_INSERT_QUERY = "INSERT QUERY BERHASIL";
 }

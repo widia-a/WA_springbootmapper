@@ -87,4 +87,11 @@ public class AccountController {
         throw new ResourceNotFoundException(ConstantMessage.WARNING_DATA_EMPTY);
     }
 
+    @PostMapping("/v1/account/insert")
+    public ResponseEntity<Object> saveBanksQuery(@RequestBody Account account)throws Exception{
+        accountService.saveBanksQuery(account);
+        return new ResponseHandler().
+                generateResponse(ConstantMessage.SUCCESS_INSERT_QUERY,HttpStatus.OK,null,null,null);
+    }
+
 }

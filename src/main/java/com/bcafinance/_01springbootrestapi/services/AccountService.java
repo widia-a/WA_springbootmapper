@@ -36,7 +36,6 @@ public class AccountService {
 
     @Transactional(rollbackFor = Exception.class)
     public List<Account> saveBulkAcc(MultipartFile multipartFile) throws Exception {
-
         try {
             List<Account> lsAccount = CsvReader.csvToAccData(multipartFile.getInputStream());
             return accountRepo.saveAll(lsAccount);
@@ -94,6 +93,11 @@ public class AccountService {
 
     public List<Account> findAllAcc() {
         return (List<Account>) accountRepo.findAll();
-
     }
+
+    @Transactional(rollbackFor = {Exception.class, SQLException.class})
+    public void saveBanksQuery(Account account) {
+        accountRepo.insertBanks(account.getAccNumber(), account.getBalance(), "1", new Date(),true);
+    }
+
 }
